@@ -16,37 +16,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package se.inera.intyg.common.support.facade.model.user;
+package se.inera.intyg.common.support.facade.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import java.util.List;
-import java.util.Map;
 import lombok.Builder;
 import lombok.Value;
-import se.inera.intyg.common.support.facade.model.CareProvider;
-import se.inera.intyg.common.support.facade.model.metadata.Unit;
-import se.inera.intyg.common.support.facade.model.user.User.UserBuilder;
+import se.inera.intyg.common.support.facade.model.CareProvider.CareProviderBuilder;
 
-@JsonDeserialize(builder = UserBuilder.class)
+@JsonDeserialize(builder = CareProviderBuilder.class)
 @Value
 @Builder
-public class User {
+public class CareProvider {
 
-    private String hsaId;
+    private String id;
     private String name;
-    private String role;
-    private SigningMethod signingMethod;
-    private LoginMethod loginMethod;
-    private Unit loggedInUnit;
-    private Unit loggedInCareUnit;
-    private Unit loggedInCareProvider;
-    private Map<String, String> preferences;
-    private boolean protectedPerson;
-    private List<CareProvider> careProviders;
 
     @JsonPOJOBuilder(withPrefix = "")
-    public static class UserBuilder {
+    public static class CareProviderBuilder {
 
     }
 }
