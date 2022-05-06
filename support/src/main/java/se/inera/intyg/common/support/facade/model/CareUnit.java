@@ -23,19 +23,20 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import java.util.List;
 import lombok.Builder;
 import lombok.Value;
-import se.inera.intyg.common.support.facade.model.CareProvider.CareProviderBuilder;
+import se.inera.intyg.common.support.facade.model.CareUnit.CareUnitBuilder;
+import se.inera.intyg.common.support.facade.model.metadata.Unit;
 
-@JsonDeserialize(builder = CareProviderBuilder.class)
+@JsonDeserialize(builder = CareUnitBuilder.class)
 @Value
 @Builder
-public class CareProvider {
+public class CareUnit {
 
-    private String id;
-    private String name;
-    private List<CareUnit> careUnits;
+    private String unitId;
+    private String unitName;
+    private List<Unit> units;
 
     @JsonPOJOBuilder(withPrefix = "")
-    public static class CareProviderBuilder {
+    public static class CareUnitBuilder {
 
     }
 }
