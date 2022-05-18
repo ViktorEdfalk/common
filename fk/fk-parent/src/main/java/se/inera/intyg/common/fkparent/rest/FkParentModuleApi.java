@@ -61,6 +61,7 @@ import se.inera.intyg.common.support.model.converter.util.WebcertModelFactoryUti
 import se.inera.intyg.common.support.modules.converter.InternalToRevoke;
 import se.inera.intyg.common.support.modules.converter.TransportConverterUtil;
 import se.inera.intyg.common.support.modules.service.WebcertModuleService;
+import se.inera.intyg.common.support.modules.support.api.FHIRModuleApi;
 import se.inera.intyg.common.support.modules.support.api.ModuleApi;
 import se.inera.intyg.common.support.modules.support.api.dto.CertificateMetaData;
 import se.inera.intyg.common.support.modules.support.api.dto.CertificateResponse;
@@ -92,7 +93,7 @@ import se.riv.clinicalprocess.healthcond.certificate.types.v3.Part;
 import se.riv.clinicalprocess.healthcond.certificate.v3.Intyg;
 import se.riv.clinicalprocess.healthcond.certificate.v3.ResultCodeType;
 
-public abstract class FkParentModuleApi<T extends Utlatande> implements ModuleApi {
+public abstract class FkParentModuleApi<T extends Utlatande> implements ModuleApi, FHIRModuleApi {
 
     private static final Logger LOG = LoggerFactory.getLogger(FkParentModuleApi.class);
 
@@ -529,4 +530,8 @@ public abstract class FkParentModuleApi<T extends Utlatande> implements ModuleAp
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public String prefillWithFhirData(String model, List<String> diagnosis) throws ModuleException {
+        return model;
+    }
 }
