@@ -271,4 +271,35 @@ public class LisjpModuleApiV1 extends FkParentModuleApi<LisjpUtlatandeV1> {
         return DefaultCertificateMessagesProvider.create(validationMessages);
     }
 
+    @Override
+    public String prefillWithFhirData(String model, List<String> diagnosis) throws ModuleException {
+        // Convert json to utlåtande.
+        final var internal = getInternal(model);
+
+        // Update utlåtande with diagnosis
+        var diagnosList = createDiagnoseListFromStrings(diagnosis);
+
+        final var updatedDraft = internal.toBuilder()
+            .setDiagnoser(diagnosList)
+            .build();
+
+        // Convert utlåtande to json
+        return toInternalModelResponse(updatedDraft);
+    }
+
+    private List<Diagnos> createDiagnoseListFromStrings(List<String> diagnosis) {
+        String splitCharacter = ":";
+        List<Diagnos> list = new ArrayList<>();
+
+        for (var str : diagnosis) {
+            var split = str.split(splitCharacter);
+            var kod = split[0];
+            var displayName = split[1];
+            var system = split[2];
+
+            list.add(Diagnos.create(kod, system, displayName, displayName));
+        }
+
+        return list;
+    }
 }
